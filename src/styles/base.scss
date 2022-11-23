@@ -1,0 +1,17 @@
+:root {
+  background-color: #ccc;
+  color: #1f1f1f;
+  height: 100vh;
+  display: flex;
+  place-items: center;
+  justify-content: center;  
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
