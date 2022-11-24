@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"
-import { loginAccount, createNewAccount } from "../../api/api";
+import { useLoginAccount, createNewAccount } from "../../api/api";
 import userProfileStore from "../../store/userProfile";
 
 const SignInForm = ({getProfile}) => {
@@ -24,32 +24,10 @@ const SignInForm = ({getProfile}) => {
     setSignInPW(e.target.value)      
   }
 
-  const handleLogin = async (e) =>{
-    //temp solution must transfer to API.jsx
-    // await loginAccount({email: signInMail, password: signInPW})
+  const handleLogin = (e) =>{
     e.preventDefault();
-    
-    await axios
-      .post("http://206.189.91.54/api/v1/auth/sign_in", {
-        email: signInMail,
-        password: signInPW,
-      })
-      .then((res) => {
-        console.log(res);                
-        overwriteProfile({
-          'access-token': `${res.headers.get('access-token')}`,
-          client: res.headers.get('client'),
-          uid: res.headers.get('uid'),
-          expiry: res.headers.get('expiry'),
-        })
-        
-        alert("Login Success");
-      })
-      .catch((ex) => {
-        alert("Something went wrong. Please check the server API and try again");
-        console.error(ex);
-      });     
-         
+    //temp solution must transfer to API.jsx
+    useLoginAccount({email: signInMail, password: signInPW});
   }
   return (
     <div className="flex-column">

@@ -20,8 +20,29 @@ export const createNewAccount = async (credentials = null) => {
     });
 };
 
-export const loginAccount = async (credentials = null) => {
 
+
+export const useLoginAccount = async (credentials = null) => {
+  // const { overwriteProfile } = userProfileStore(
+  //   (state) => ({ overwriteProfile: state.overwriteProfile })
+  // );
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  try {
+    const response = await axios.post("http://206.189.91.54/api/v1/auth/sign_in", {
+      email: credentials.email,
+      password: credentials.password,
+    })
+  
+    const headers = await response.headers
+    // overwriteProfile({...headers})
+    alert("Successful Login")
+
+  } catch (ex) {
+    alert("Something went wrong. Please check the server API and try again");
+    console.error(ex);
+  }
+  return <></>;
 };
 
 export const createChannel = (credentials = null) => {};
@@ -41,3 +62,5 @@ export const getAllUsers = async (credentials = null) => {
   const {data} = await axios.get("http://206.189.91.54/api/v1/users",{ headers: credentials});
   return data.data
 };
+
+export default useLoginAccount;
